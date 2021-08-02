@@ -63,7 +63,8 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', #required by allauth
+                'django.template.context_processors.request',
+                # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -84,12 +85,19 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# allwes authentication via username or email
 ACCOUNT_EMAIL_REQUIRED = True
+# email is required to register
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# verification is mandatory
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# enter the email twice to ensure no typo is made
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+# username min 4 characters
 LOGIN_URL = '/accounts/login/'
+# login url
 LOGIN_REDIRECT_URL = '/'
+# redirect url
 
 WSGI_APPLICATION = 'botuique_ado.wsgi.application'
 

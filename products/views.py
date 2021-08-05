@@ -21,12 +21,21 @@ def all_products(request):
     if request.GET:
 
         if 'sort' in request.GET:
+            """
+            Sort products by name fields(keys)
+            """
             sortkey = request.GET['sort']
             sort = sortkey
             if sortkey == "name":
                 sortkey = 'lower_name'
                 products = products.annotate(lower_name=Lower("name"))
+            if sortkey == 'category':
+                sortkey = 'category__name'
+
             if 'direction' in request.GET:
+                """
+                Sort Elements based on direction
+                """
                 direction = request.GET['direction']
                 if direction == "desc":
                     sortkey = f'-{sortkey}'
@@ -60,14 +69,14 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
-        'carrent_categories': categories,
+        'current_categories': categories,
         'current_sorting': current_sorting,
     }
 
     return render(request, 'products/products.html', context)
 
 
-def prodcut_detail(request, product_id):
+def product_detail(request, product_id):
     """
     A view to show individual product details
     """

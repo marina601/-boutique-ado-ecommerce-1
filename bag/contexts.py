@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 def bag_contents(request):
-
+    # Initialize the variables
     bag_items = []
     total = 0
     product_count = 0
@@ -18,6 +18,8 @@ def bag_contents(request):
         # to qualify for free delivery
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
     else:
+        # if the total is more than threshold
+        # delivery will be 0
         delivery = 0
         free_delivery_delta = 0
 

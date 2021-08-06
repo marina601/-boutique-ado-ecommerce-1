@@ -142,7 +142,9 @@
 
 {% block postload_js %}
     {{ block.super }}
+     
         <script type="text/javascript">
+        // link which takes the user back to top of the page
             $('.btt-link').click(function(e){
                 window.scrollTo(0,0);
             });

@@ -28,6 +28,7 @@
            <!--if there are items in the bag render the table-->
                <div class="table-responsive rounded">
                    <table class="table table-sm table-borderless">
+                       <!--table heading-->
                        <thead class="text-black">
                            <tr>
                                <th scope="col">Product Info</th>
@@ -37,22 +38,28 @@
                                <th scope="col">Subtotal</th>
                            </tr>
                        </thead>
-
+                    <!--Iterate through the items in the bag-->
                        {% for item in bag_items %}
                            <tr>
+                               <!--Product image-->
                                <td class="p-3 w-25">
                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded">
                                </td>
+                               <!--Product name and SKU-->
                                <td class="py-3">
                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                   <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
                                    <p class="my-0 small text-muted">SKU: {{item.product.sku|upper }}</p>
                                </td>
+                               <!--Product Price-->
                                <td class="py-3">
                                    <p class="my-0">${{ item.product.price }}</p>
                                 </td>
+                                <!--Product Quantity-->
                                 <td class="py-3">
                                     <p class="my-0">{{ item.quantity }}</p>
                                  </td>
+                                 <!--Product Total-->
                                  <td class="py-3">
                                     <p class="my-0">${{ item.item_total }}</p>
                                  </td>
@@ -60,9 +67,12 @@
                        {% endfor %}
                        <tr>
                            <td colspan="5" class="pt-5 text-right">
+                               <!--Bag Total-->
                                <h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
+                               <!--Delivery Price-->
                                <h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
                                <h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                               <!--If delivery is not free-->
                                {% if free_delivery_delta > 0 %}
                                <p class="mb-1 text-danger">
                                    You could get free delivery by spending just
@@ -72,6 +82,7 @@
                            </td>
                        </tr>
                        <tr>
+                           <!--Link to go back to the Products Page-->
                            <td colspan="5" class="text-right">
                                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
                                    <span class="icon">
@@ -79,6 +90,7 @@
                                    </span>
                                    <span class="text-uppercase">Keep Shopping</span>
                                </a>
+                               <!--Secure checkout button-->
                                <a href="" class="btn btn-black rounded-0 btn-lg">
                                    <span class="text-uppercase">Secure Checkout</span>
                                    <span class="icon">

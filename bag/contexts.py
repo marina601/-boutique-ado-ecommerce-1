@@ -15,17 +15,31 @@ def bag_contents(request):
     Iterate through all the items in the shopping bag
     """
 
-    for item_id, quantity in bag.items():
-        product = get_object_or_404(Product, pk=item_id)
-        total += quantity * product.price
-        product_count += quantity
-        item_total = quantity * product.price
-        bag_items.append({
-            'item_id': item_id,
-            'quantity': quantity,
-            'product': product,
-            'item_total': item_total,
-        })
+    for item_id, item_data in bag.items():
+        if isinstance(item_data, int):
+            product = get_object_or_404(Product, pk=item_id)
+            total += item_data * product.price
+            product_count += item_data
+            item_total = item_data * product.price
+            bag_items.append({
+                'item_id': item_id,
+                'quantity': item_data,
+                'product': product,
+                'item_total': item_total,
+            })
+        else:
+            product = get_object_or_404(Product, pk=item_id)
+            for size, quantity in item_data['items_by_size'].items():
+                total += quantity * product.price
+                product_count += quantity
+                item_total = quantity * product.price
+                bag_items.append({
+                    'item_id': item_id,
+                    'quantity': item_data,
+                    'product': product,
+                    'item_total': item_total,
+                    'size': size,
+                })
 
     """
     If the total is less than delivery threshold

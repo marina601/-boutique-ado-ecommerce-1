@@ -35,7 +35,7 @@ def bag_contents(request):
                 item_total = quantity * product.price
                 bag_items.append({
                     'item_id': item_id,
-                    'quantity': item_data,
+                    'quantity': quantity,
                     'product': product,
                     'item_total': item_total,
                     'size': size,
@@ -46,7 +46,7 @@ def bag_contents(request):
     multiply the total by 10%
     """
     if total < settings.FREE_DELIVERY_THRESHOLD:
-        delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE)
+        delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         # calculates how much more the customer needs to spend in order
         # to qualify for free delivery
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total

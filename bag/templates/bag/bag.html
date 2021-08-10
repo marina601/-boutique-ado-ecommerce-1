@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bags_tools %}
 
 {% block page_header %}
   <div class="container header-container">
@@ -45,7 +46,7 @@
                                <td class="p-3 w-25">
                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded">
                                </td>
-                               <!--Product name and SKU-->
+                               <!--Product name, SKU, size-->
                                <td class="py-3">
                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                                    <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
@@ -57,7 +58,7 @@
                                 </td>
                                 <!--Product Quantity-->
                                 <td class="py-3">
-                                    <form class="form update-form" action="" method="POST">
+                                    <form class="form update-form" action="{% url 'adjust_bag' item.item_id %}" method="POST">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <div class="input-group">
@@ -89,11 +90,11 @@
                                     </form>
                                     <a class="update-link text-info"><small>Update</small></a>
                                     <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" 
-                                       data-size="{{ item.size }}"><small>Remove</small></a>
+                                       data-product_size="{{ item.size }}"><small>Remove</small></a>
                                  </td>
                                  <!--Product Total-->
                                  <td class="py-3">
-                                    <p class="my-0">${{ item.item_total }}</p>
+                                    <p>${{ item.product.price | calc_subtotal:item.quantity }}</p>
                                  </td>
                            </tr>
                        {% endfor %}
@@ -149,6 +150,29 @@
 
 {% block postload_js %}
 {{ block.super }}
-
 {% include 'products/includes/quantity_input_script.html' %}
+
+<script type="text/javascript">
+    // Update quantity on click
+        $('.update-link').click(function(e){
+            var form = $(this).prev('.update-form');
+            form.submit();
+        });
+    
+        // Remove quantity on click
+        $('.remove-item').click(function(e){
+            var csrfToken = "{{ csrf_token }}"
+            var itemId = $(this).attr('id').split('remove_')[1];
+            var size = $(this).data('product_size');
+            var url = `/bag/remove/${itemId}/`;
+            var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
+    
+            $.post(url, data)
+             .done(function() {
+                 location.reload();
+             });
+    
+        });
+    
+    </script>
 {% endblock %}

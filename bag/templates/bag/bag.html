@@ -19,6 +19,7 @@
           <div class="col">
               <hr>
               <h2 class="logo-font mb-4">Shopping Bag</h2>
+              <hr>
           </div>
       </div>
   </div>
@@ -70,10 +71,10 @@
                                                         </span>
                                                     </button>
                                                 </div>
-                                                <input class="form-control form-control-sm qty_input" type="number" 
-                                                    name="quantity" value="{{ item.item_id }}" min="1" max="99" 
-                                                    data-item_id="{{ item.item_id }}" 
-                                                    id="id_qty_{{ item.item_id }}">
+                                                <input class="form-control form-control-sm qty_input" type="number"
+                                                        name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                                        data-item_id="{{ item.item_id }}"
+                                                        id="id_qty_{{ item.item_id }}">
                                                 <div class="input-group-append">
                                                     <button class="increment-qty btn btn-sm btn-black rounded-0"
                                                         data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
@@ -148,7 +149,7 @@
    </div>
 {% endblock %}
 
-{% block postload_js %}
+{% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
 

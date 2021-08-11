@@ -1,4 +1,8 @@
+# pylint: disable=no-member
 from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.contrib import messages
+
+from products.models import Product
 
 # Create your views here.
 
@@ -14,7 +18,7 @@ def add_to_bag(request, item_id):
     """
     Add a quantity of the specific product to the bag
     """
-
+    product = Product.objects.get(pk=item_id)
     quantity = int(request.POST.get('quantity'))
     # from the form redirect input
     redirect_url = request.POST.get('redirect_url')
@@ -45,6 +49,7 @@ def add_to_bag(request, item_id):
             bag[item_id] += quantity
         else:
             bag[item_id] = quantity
+            messages.success(request, f'Added {product.name} to your bag')
 
     """
     Overwrite the variable in the session with

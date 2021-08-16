@@ -61,8 +61,8 @@ form.addEventListener('submit', function (ev) {
         }
     }).then(function (result) {
         if (result.error) {
-            var errorDiv = document.getElementById('card-errors');
-            var html = `
+            const errorDiv = document.getElementById('card-errors');
+            const html = `
                     <span class="icon" role="alert">
                     <i class="fas fa-times"></i>
                     </span>

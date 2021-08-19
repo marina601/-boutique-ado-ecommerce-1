@@ -16,7 +16,7 @@ def webhook(request):
     """
     # Setup
     wh_secret = settings.STRIPE_WH_SECRET
-    stripe_api_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = settings.STRIPE_SECRET_KEY
 
     # Get the webhook data and verify its signature
     payload = request.body
@@ -55,4 +55,3 @@ def webhook(request):
     # Call the event handler with the event
     response = event_handler(event)
     return response
-  

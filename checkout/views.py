@@ -14,7 +14,8 @@ import json
 
 # Create your views here.
 
-@request_POST
+
+@require_POST
 def cache_checkout_data(request):
     """
     Getting the user to save their information to stripe
@@ -31,10 +32,9 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Sorry your payment cannot be \
+        messages.error(request, 'Sorry, your payment cannot be \
             proccessed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
-
 
 
 def checkout(request):

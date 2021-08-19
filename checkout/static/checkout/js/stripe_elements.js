@@ -25,7 +25,7 @@ var style = {
     }
 };
 var card = elements.create('card', {style: style});
-card.mount('#card-elements');
+card.mount('#card_elements');
 
 // Handle realtime validation errors on the card element
 card.addEventListener('change', function (event) {

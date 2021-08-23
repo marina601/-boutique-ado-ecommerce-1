@@ -1,3 +1,10 @@
+/* Height of profile form + submit button
+if the order history is longer, the scroll bar will appear*/
+.order-history {
+    max-height: 416px;
+    overflow: auto;
+}
+
 #profile-update-form input::placeholder {
     color: #aab7c4;
 }

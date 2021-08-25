@@ -1,1 +1,1 @@
-web: guicorn boutique_ado_v1.wsgi:application
+web: guicorn boutique-ado-ecommerce-1.wsgi:application

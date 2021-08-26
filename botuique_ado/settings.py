@@ -34,11 +34,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-if development:
-    ALLOWED_HOSTS = ['localhost']
-else:
-    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
+ALLOWED_HOSTS = ['boutique-ado-ecommerce-1.herokuapp.com', 'localhost']
 
 # Application definition
 

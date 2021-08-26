@@ -1,1 +1,1 @@
-web: gunicorn botuique_ado:application
+web: gunicorn botuique_ado:aplication

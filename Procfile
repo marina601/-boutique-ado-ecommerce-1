@@ -1,1 +1,1 @@
-web: gunicorn application:app
+web: gunicorn botique_ado-v1:app

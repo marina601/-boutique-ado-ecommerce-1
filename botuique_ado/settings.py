@@ -137,7 +137,7 @@ WSGI_APPLICATION = 'botuique_ado.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-if 'DATABESE_URL' in env:
+if 'DATABASE_URL' in env:
     DATABASES = {
         'default': dj_database_url.parse(env('DATABASE_URL'))
     }

@@ -206,7 +206,7 @@ if 'USE_AWS' in os.environ:
 
     # Static and media files
     STATIC_STORAGE = 'custom_storages.StaticStorage'
-    STATIC_LOCATION  = 'static'
+    STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
 
